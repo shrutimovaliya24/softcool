@@ -150,7 +150,7 @@ export default function Footer() {
 
             {/* Copyright */}
             <div className="pt-4">
-              <p className="text-sm text-white font-sans">© 2024 by Akshar Decor</p>
+              <p className="text-sm text-white font-sans">© 2025 all rights reserved by Akshar Decor</p>
             </div>
           </div>
         </div>
