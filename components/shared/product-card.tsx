@@ -36,13 +36,13 @@ export default function ProductCard({
       href={href}
       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full"
     >
-      <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-white">
+      <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 bg-white flex items-center justify-center">
         <Image
           src={image}
           alt={name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-          className="object-contain transition-transform duration-300 group-hover:scale-105"
+          className="object-contain scale-110 transition-transform duration-300 group-hover:scale-125"
           quality={90}
         />
         {badge && (
