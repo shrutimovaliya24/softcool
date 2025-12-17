@@ -1,6 +1,22 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/shared/page-hero";
 import AnimatedSection from "@/components/shared/animated-section";
 import { Truck, Package, RefreshCw, Mail } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Shipping & Returns Policy | Softcool",
+  description:
+    "Learn about Softcool’s shipping timelines, free-shipping thresholds, and 30-day return policy for pillows and comfort products across India.",
+  alternates: {
+    canonical: "/terms/shipping",
+  },
+  openGraph: {
+    title: "Shipping & Returns Policy | Softcool",
+    description:
+      "View details on Softcool shipping options, delivery times, return conditions, and how to request a return or exchange.",
+    url: "/terms/shipping",
+  },
+};
 
 export default function ShippingPage() {
   return (
@@ -10,8 +26,8 @@ export default function ShippingPage() {
         subtitle="Fast, reliable shipping and hassle-free returns"
       />
 
-      <section className="p-8 bg-white">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <section className="py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
           {/* Shipping Information */}
           <AnimatedSection delay={100}>
             <div className="mb-16">

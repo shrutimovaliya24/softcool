@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* SoftCool Brand Colors from Packaging */
+  --color-light-blue: #5298C1;
+  --color-yellow: #A29C27;
+  --color-mustard: #CFC753;
+  --color-white: #ffffff;
+  --color-dark: #0D031A;
 }
 
 @theme inline {
@@ -145,7 +151,7 @@ img, video {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #009EDD 0%, #525A65 100%);
+  background: linear-gradient(135deg, #5298C1 0%, #A29C27 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -183,7 +189,15 @@ img, video {
 
 .product-carousel-swiper .swiper-pagination-bullet-active-custom {
   width: 32px;
-  background: #009EDD;
+  background: #5298C1;
+}
+
+/* Hide hero / carousel nav arrows on very small screens to avoid overlapping content */
+@media (max-width: 639px) {
+  .swiper-button-prev-custom,
+  .swiper-button-next-custom {
+    display: none !important;
+  }
 }
 
 .swiper-button-prev-custom.swiper-button-disabled,
@@ -191,4 +205,23 @@ img, video {
   opacity: 0.35;
   cursor: auto;
   pointer-events: none;
+}
+
+/* Custom Select Dropdown Styling */
+select option {
+  background-color: white;
+  color: #0D031A;
+  padding: 8px 12px;
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+  background-color: #5298C1 !important;
+  color: white !important;
+}
+
+select:focus option:checked {
+  background-color: #5298C1 !important;
+  color: white !important;
 }

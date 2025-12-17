@@ -14,9 +14,9 @@ const Sidebar = memo(function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/collections', label: 'Products' },
     { href: '/about', label: 'About Us' },
-    { href: '/collections', label: 'Collections' },
-    { href: '/contact', label: 'Contact Us' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   // Prevent body scroll when sidebar is open
@@ -96,8 +96,8 @@ const Sidebar = memo(function Sidebar({ isOpen, onClose }: SidebarProps) {
                     onClick={onClose}
                     className={`block text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold transition-all duration-300 touch-manipulation py-2 sm:py-3 md:py-4 px-4 sm:px-6 rounded-lg ${
                       isActive
-                        ? 'text-[#009EDD] bg-[#009EDD]/10 scale-105 shadow-sm'
-                        : 'text-gray-800 hover:text-[#009EDD] hover:bg-gray-50 hover:scale-105 active:scale-100'
+                        ? 'text-[#5298C1] bg-[#5298C1]/10 scale-105 shadow-sm'
+                        : 'text-gray-800 hover:text-[#5298C1] hover:bg-gray-50 hover:scale-105 active:scale-100'
                     }`}
                     aria-current={isActive ? 'page' : undefined}
                   >

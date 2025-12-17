@@ -1,7 +1,7 @@
 export default function MissionVision() {
   return (
     <div className="p-4 sm:p-6 md:p-8 bg-gray-50">
-      <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 font-sans">Our Mission</h2>

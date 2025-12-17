@@ -1,7 +1,7 @@
 export default function DirectContactSection() {
   return (
     <section className="p-8" style={{ backgroundColor: '#009EDD' }}>
-      <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white font-sans">Direct from Us to You</h2>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto font-sans">

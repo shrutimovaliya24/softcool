@@ -22,22 +22,21 @@ export default function CartPage() {
         subtitle="Review your items and proceed to checkout"
       />
 
-      <section className="p-8 bg-white">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <section className="py-8 sm:py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
           {cartItems.length === 0 ? (
             <AnimatedSection delay={100}>
               <div className="text-center py-16">
-                <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <ShoppingCart className="w-12 h-12 text-gray-400" />
+                <div className="w-24 h-24 bg-[#FDF55A] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <ShoppingCart className="w-12 h-12 text-[#5298C1]" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 font-sans">Your cart is empty</h2>
-                <p className="text-gray-600 text-lg mb-8 font-sans">
+                <h2 className="text-2xl font-bold text-[#5298C1] mb-4 font-sans">Your cart is empty</h2>
+                <p className="text-[#0D031A] text-lg mb-8 font-sans">
                   Looks like you haven't added anything to your cart yet.
                 </p>
                 <Link
                   href="/collections"
-                  className="inline-flex items-center justify-center px-8 py-3 text-white rounded-lg font-semibold transition-all font-sans hover:opacity-90 hover:shadow-lg"
-                  style={{ backgroundColor: '#009EDD' }}
+                  className="inline-flex items-center justify-center px-8 py-3 bg-[#FDF55A] text-[#0D031A] rounded-lg font-semibold transition-all font-sans hover:bg-[#5298C1] hover:text-white hover:shadow-lg"
                 >
                   Continue Shopping
                 </Link>
@@ -48,7 +47,7 @@ export default function CartPage() {
               <div className="lg:col-span-2 space-y-4">
                 {cartItems.map((item, index) => (
                   <AnimatedSection key={`${item.id}-${index}`} delay={index * 100}>
-                    <div className="bg-white p-6 rounded-xl shadow-lg hover-lift border border-gray-200">
+                    <div className="bg-white p-6 rounded-xl shadow-lg hover-lift border border-[#5298C1]/20">
                       <div className="flex gap-6">
                         <div className="relative w-24 h-24 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
                           <Image
@@ -60,11 +59,11 @@ export default function CartPage() {
                         </div>
                         <div className="flex-1">
                           <Link href={`/pillow/${item.id}`}>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2 font-sans hover:text-[#009EDD] transition-colors">
+                            <h3 className="text-lg font-semibold text-[#0D031A] mb-2 font-sans hover:text-[#5298C1] transition-colors">
                               {item.name}
                             </h3>
                           </Link>
-                          <p className="text-gray-600 mb-4 font-sans">
+                          <p className="text-[#0D031A] mb-4 font-sans">
                             ₹{item.price.toLocaleString()} each
                           </p>
                           <div className="flex items-center gap-4">
@@ -90,7 +89,7 @@ export default function CartPage() {
                               <Trash2 className="w-5 h-5" />
                             </button>
                             <div className="ml-auto">
-                              <p className="text-lg font-semibold text-gray-900 font-sans">
+                              <p className="text-lg font-semibold text-[#0D031A] font-sans">
                                 ₹{(item.price * item.quantity).toLocaleString()}
                               </p>
                             </div>
@@ -104,14 +103,14 @@ export default function CartPage() {
               
               <div className="lg:col-span-1">
                 <AnimatedSection delay={300}>
-                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 shadow-lg sticky top-8">
-                    <h2 className="text-xl font-bold text-gray-900 mb-6 font-sans">Order Summary</h2>
+                  <div className="bg-white border border-[#5298C1]/20 rounded-xl p-6 shadow-lg sticky top-8">
+                    <h2 className="text-xl font-bold text-[#5298C1] mb-6 font-sans">Order Summary</h2>
                     <div className="space-y-3 mb-6">
-                      <div className="flex justify-between text-gray-700 font-sans">
+                      <div className="flex justify-between text-[#0D031A] font-sans">
                         <span>Subtotal</span>
                         <span>₹{getTotalPrice().toLocaleString()}</span>
                       </div>
-                      <div className="flex justify-between text-gray-700 font-sans">
+                      <div className="flex justify-between text-[#0D031A] font-sans">
                         <span>Shipping</span>
                         <span>
                           {shipping === 0 ? (
@@ -122,12 +121,12 @@ export default function CartPage() {
                         </span>
                       </div>
                       {getTotalPrice() < 2000 && (
-                        <p className="text-sm text-gray-500 font-sans">
+                        <p className="text-sm text-[#0D031A] font-sans">
                           Add ₹{(2000 - getTotalPrice()).toLocaleString()} more for free shipping
                         </p>
                       )}
-                      <div className="border-t border-gray-300 pt-3">
-                        <div className="flex justify-between text-xl font-bold text-gray-900 font-sans">
+                      <div className="border-t border-[#5298C1]/20 pt-3">
+                        <div className="flex justify-between text-xl font-bold text-[#0D031A] font-sans">
                           <span>Total</span>
                           <span>₹{total.toLocaleString()}</span>
                         </div>
@@ -135,8 +134,7 @@ export default function CartPage() {
                     </div>
                     <button
                       onClick={() => router.push('/checkout')}
-                      className="block w-full text-center text-white py-3 px-6 rounded-lg font-semibold transition-all font-sans hover:opacity-90 hover:shadow-lg"
-                      style={{ backgroundColor: '#009EDD' }}
+                      className="block w-full text-center bg-[#FDF55A] text-[#0D031A] py-3 px-6 rounded-lg font-semibold transition-all font-sans hover:bg-[#5298C1] hover:text-white hover:shadow-lg"
                     >
                       Proceed to Checkout
                     </button>

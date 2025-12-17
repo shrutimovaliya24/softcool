@@ -20,8 +20,11 @@ interface TestimonialsSectionProps {
 
 export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
   return (
-    <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
+    <section className="py-8 sm:py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#5298C1] mb-6 sm:mb-8 md:mb-10 text-center font-sans leading-tight">
+          Customer Reviews
+        </h2>
         {/* Swiper Carousel */}
         <div className="relative">
           <Swiper
@@ -52,16 +55,19 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 slidesPerGroup: 2,
               },
             }}
+            style={{
+              height: 'auto'
+            }}
             className="testimonials-carousel-swiper"
           >
             {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index}>
-                <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-md h-full flex flex-col">
-                  <blockquote className="text-sm sm:text-base md:text-lg text-gray-700 mb-4 sm:mb-6 font-sans leading-relaxed flex-grow">
+              <SwiperSlide key={index} className="h-auto">
+                <div className="bg-white p-4 sm:p-6 md:p-8 rounded-xl border-2 border-[#FDF55A] shadow-md hover:shadow-lg transition-shadow duration-300 h-full min-h-[280px] sm:min-h-[300px] md:min-h-[320px] flex flex-col">
+                  <blockquote className="text-sm sm:text-base text-[#0D031A] mb-4 sm:mb-6 font-sans leading-relaxed grow flex-1">
                     {testimonial.quote}
                   </blockquote>
-                  <div className="flex items-center gap-3 sm:gap-4">
-                    <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden bg-gray-300 shrink-0">
+                  <div className="flex items-center gap-3 sm:gap-4 mt-auto">
+                    <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden bg-[#5298C1]/20 border-2 border-[#FDF55A] shrink-0">
                       {testimonial.image && (
                         <Image
                           src={testimonial.image}
@@ -74,8 +80,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                       )}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-sm sm:text-base md:text-lg text-gray-900 font-sans">{testimonial.author}</h4>
-                      <p className="text-xs sm:text-sm text-gray-500 font-sans">Customer Review</p>
+                      <h4 className="font-semibold text-base sm:text-lg text-[#0D031A] font-sans">{testimonial.author}</h4>
                     </div>
                   </div>
                 </div>
@@ -83,6 +88,45 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             ))}
           </Swiper>
         </div>
+        
+        {/* Custom Styles for Equal Height Cards and Pagination */}
+        <style jsx global>{`
+          .testimonials-carousel-swiper .swiper-slide {
+            height: auto;
+            display: flex;
+          }
+          .testimonials-carousel-swiper .swiper-slide > div {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+          }
+          .testimonials-carousel-swiper .swiper-pagination {
+            position: relative !important;
+            bottom: 0 !important;
+            margin-top: 24px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+          }
+          .testimonials-carousel-swiper .swiper-pagination-bullet-custom {
+            width: 10px !important;
+            height: 10px !important;
+            background: #5298C1 !important;
+            opacity: 0.4 !important;
+            border-radius: 50% !important;
+            transition: all 0.3s ease !important;
+            cursor: pointer !important;
+            margin: 0 !important;
+            display: inline-block !important;
+          }
+          .testimonials-carousel-swiper .swiper-pagination-bullet-active-custom {
+            background: #5298C1 !important;
+            opacity: 1 !important;
+            width: 12px !important;
+            height: 12px !important;
+          }
+        `}</style>
       </div>
     </section>
   );

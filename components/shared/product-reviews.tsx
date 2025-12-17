@@ -78,17 +78,19 @@ export default function ProductReviews({ productId, reviews: initialReviews }: P
 
   return (
     <section className="py-8 bg-white">
-      <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 font-sans">Reviews</h2>
-              <div className="flex items-center gap-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 font-sans">
+                Reviews
+              </h2>
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <div className="flex items-center">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star
                       key={star}
-                      className={`w-5 h-5 ${
+                      className={`w-4 h-4 sm:w-5 sm:h-5 ${
                         star <= Math.round(averageRating)
                           ? 'fill-yellow-400 text-yellow-400'
                           : 'text-gray-300'
@@ -96,30 +98,32 @@ export default function ProductReviews({ productId, reviews: initialReviews }: P
                     />
                   ))}
                 </div>
-                <span className="text-lg font-semibold text-gray-900 ml-2 font-sans">
+                <span className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 ml-1 sm:ml-2 font-sans">
                   {averageRating.toFixed(1)}
                 </span>
-                <span className="text-gray-600 font-sans">({reviews.length} review{reviews.length !== 1 ? 's' : ''})</span>
+                <span className="text-xs sm:text-sm text-gray-600 font-sans">
+                  ({reviews.length} review{reviews.length !== 1 ? 's' : ''})
+                </span>
               </div>
             </div>
             <button
               onClick={() => setShowReviewForm(!showReviewForm)}
-              className="px-6 py-2 bg-[#009EDD] text-white rounded-lg font-semibold hover:opacity-90 transition-opacity font-sans"
+              className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-[#009EDD] text-white rounded-lg font-semibold text-sm sm:text-base hover:opacity-90 transition-opacity font-sans"
             >
               Leave a Review
             </button>
           </div>
 
           {/* Rating Distribution */}
-          <div className="flex items-center gap-8 mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mb-6">
             <div className="space-y-2">
               {ratingDistribution.map(({ rating, count }) => (
                 <div key={rating} className="flex items-center gap-2">
                   <span className="text-sm text-gray-600 font-sans w-12">{rating} stars</span>
-                  <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="w-28 sm:w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-[#009EDD] transition-all"
-                      style={{ width: `${(count / reviews.length) * 100}%` }}
+                      style={{ width: `${reviews.length ? (count / reviews.length) * 100 : 0}%` }}
                     />
                   </div>
                   <span className="text-sm text-gray-600 font-sans w-8">{count}</span>

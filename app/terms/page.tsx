@@ -1,6 +1,22 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/shared/page-hero";
 import AnimatedSection from "@/components/shared/animated-section";
 import { FileText, Scale, CreditCard, Shield } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions | Softcool",
+  description:
+    "Review Softcool’s terms and conditions, including product usage, pricing, payments, and intellectual property policies for our pillow and comfort products.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms & Conditions | Softcool",
+    description:
+      "Understand the terms that govern using Softcool’s website, placing orders, making payments, and accessing our services.",
+    url: "/terms",
+  },
+};
 
 export default function TermsPage() {
   return (
@@ -10,8 +26,8 @@ export default function TermsPage() {
         subtitle="Please read these terms carefully before using our website"
       />
 
-      <section className="p-8 bg-white">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <section className="py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
           <AnimatedSection delay={100}>
             <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl mb-8 border-l-4 border-[#009EDD]">
               <p className="text-gray-600 font-sans mb-2">

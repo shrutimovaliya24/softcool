@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { Phone, Mail, MapPin, Send, X } from 'lucide-react';
 import PageHero from '@/components/shared/page-hero';
 import AnimatedSection from '@/components/shared/animated-section';
-import FAQ from '@/components/shared/faq';
-import { contactFAQs } from '@/lib/faq-data';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,8 +11,6 @@ export default function ContactPage() {
     lastName: '',
     email: '',
     phone: '',
-    productType: '',
-    quantity: '',
     message: ''
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -40,16 +36,6 @@ export default function ContactPage() {
 
     if (formData.phone && !/^[0-9]{10}$/.test(formData.phone.replace(/\D/g, ''))) {
       newErrors.phone = 'Please enter a valid 10-digit phone number';
-    }
-
-    if (!formData.productType) {
-      newErrors.productType = 'Please select a product type';
-    }
-
-    if (!formData.quantity) {
-      newErrors.quantity = 'Quantity is required';
-    } else if (parseInt(formData.quantity) < 1) {
-      newErrors.quantity = 'Quantity must be at least 1';
     }
 
     if (!formData.message.trim()) {
@@ -88,8 +74,6 @@ export default function ContactPage() {
       lastName: '',
       email: '',
       phone: '',
-      productType: '',
-      quantity: '',
       message: ''
     });
     setErrors({});
@@ -167,17 +151,17 @@ export default function ContactPage() {
         subtitle="Get in touch with us for any inquiries"
       />
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white">
+      <section className="py-8 sm:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-start">
             {/* Contact Form */}
             <AnimatedSection delay={100}>
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-5 sm:p-6 md:p-8 lg:p-10 xl:p-12 shadow-lg hover-lift">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 sm:mb-8 font-sans leading-tight">Send us a Message</h2>
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+              <div className="bg-white border border-[#5298C1]/20 rounded-lg shadow-sm h-full flex flex-col p-4 sm:p-5 md:p-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#5298C1] mb-4 sm:mb-6 font-sans leading-tight">Send us a Message</h2>
+                <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 flex-1 flex flex-col">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <div>
-                      <label htmlFor="firstName" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 font-sans">
+                      <label htmlFor="firstName" className="block text-xs font-medium text-[#0D031A] mb-1 font-sans">
                         First name
                       </label>
                       <input
@@ -186,11 +170,12 @@ export default function ContactPage() {
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-transparent transition-all font-sans"
+                        placeholder="First name"
+                        className="w-full px-3 py-2 border border-[#5298C1]/30 rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm"
                       />
                     </div>
                     <div>
-                      <label htmlFor="lastName" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 font-sans">
+                      <label htmlFor="lastName" className="block text-xs font-medium text-[#0D031A] mb-1 font-sans">
                         Last name
                       </label>
                       <input
@@ -199,12 +184,13 @@ export default function ContactPage() {
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-transparent transition-all font-sans"
+                        placeholder="Last name"
+                        className="w-full px-3 py-2 border border-[#5298C1]/30 rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm"
                       />
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 font-sans">
+                    <label htmlFor="email" className="block text-xs font-medium text-[#0D031A] mb-1 font-sans">
                       Email <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -214,8 +200,9 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-transparent transition-all font-sans ${
-                        errors.email ? 'border-red-500' : 'border-gray-300'
+                      placeholder="Email"
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm ${
+                        errors.email ? 'border-red-500' : 'border-[#5298C1]/30'
                       }`}
                     />
                     {errors.email && (
@@ -223,7 +210,7 @@ export default function ContactPage() {
                     )}
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 font-sans">
+                    <label htmlFor="phone" className="block text-xs font-medium text-[#0D031A] mb-1 font-sans">
                       Phone
                     </label>
                     <input
@@ -232,8 +219,9 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-transparent transition-all font-sans ${
-                        errors.phone ? 'border-red-500' : 'border-gray-300'
+                      placeholder="Phone"
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm ${
+                        errors.phone ? 'border-red-500' : 'border-[#5298C1]/30'
                       }`}
                     />
                     {errors.phone && (
@@ -241,61 +229,19 @@ export default function ContactPage() {
                     )}
                   </div>
                   <div>
-                    <label htmlFor="productType" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 font-sans">
-                      Select Product type <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      id="productType"
-                      name="productType"
-                      value={formData.productType}
-                      onChange={handleChange}
-                      required
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-transparent transition-all font-sans bg-white ${
-                        errors.productType ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    >
-                      <option value="">Choose one</option>
-                      <option value="pillow">Pillow</option>
-                      <option value="cushion">Cushion</option>
-                      <option value="bolster">Bolster</option>
-                    </select>
-                    {errors.productType && (
-                      <p className="mt-1 text-xs text-red-600 font-sans">{errors.productType}</p>
-                    )}
-                  </div>
-                  <div>
-                    <label htmlFor="quantity" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 font-sans">
-                      Quantity <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      id="quantity"
-                      name="quantity"
-                      min="1"
-                      value={formData.quantity}
-                      onChange={handleChange}
-                      required
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-transparent transition-all font-sans ${
-                        errors.quantity ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    />
-                    {errors.quantity && (
-                      <p className="mt-1 text-xs text-red-600 font-sans">{errors.quantity}</p>
-                    )}
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 font-sans">
+                    <label htmlFor="message" className="block text-xs font-medium text-[#0D031A] mb-1 font-sans">
                       Message <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       id="message"
                       name="message"
-                      rows={4}
+                      rows={3}
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-transparent transition-all font-sans resize-none ${
-                        errors.message ? 'border-red-500' : 'border-gray-300'
+                      placeholder="Message"
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm resize-none ${
+                        errors.message ? 'border-red-500' : 'border-[#5298C1]/30'
                       }`}
                     ></textarea>
                     {errors.message && (
@@ -304,10 +250,8 @@ export default function ContactPage() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full text-white py-2.5 sm:py-3 md:py-3.5 px-6 sm:px-8 rounded-lg font-semibold text-sm sm:text-base md:text-lg transition-all font-sans hover:opacity-90 hover:shadow-lg flex items-center justify-center gap-2"
-                    style={{ backgroundColor: '#009EDD' }}
+                    className="w-full bg-[#FDF55A] text-[#0D031A] py-2 px-4 rounded-lg font-semibold text-sm transition-all font-sans hover:bg-[#5298C1] hover:text-white"
                   >
-                    <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                     Submit
                   </button>
                 </form>
@@ -316,27 +260,28 @@ export default function ContactPage() {
 
             {/* Contact Information */}
             <AnimatedSection delay={200}>
-              <div className="space-y-6 sm:space-y-8">
-                <div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 font-sans leading-tight">Get in Touch</h2>
-                  <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-6 sm:mb-8 leading-relaxed font-sans">
+              <div className="bg-white border border-[#5298C1]/20 rounded-lg shadow-sm h-full flex flex-col p-4 sm:p-5 md:p-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#5298C1] mb-4 sm:mb-6 font-sans leading-tight">Get in Touch</h2>
+                <div className="flex-1 flex flex-col">
+                  <p className="text-sm sm:text-base text-[#0D031A] mb-4 sm:mb-6 leading-relaxed font-sans">
                     Experience the comfort of buying straight from the makers. Our experts help you find 
                     the pillow made for your perfect rest. Pure comfort, honest quality — delivered right 
                     to your doorstep.
                   </p>
-                </div>
 
-                <div className="space-y-4 sm:space-y-5 md:space-y-6">
-                  <div className="bg-white p-4 sm:p-5 md:p-6 rounded-xl shadow-lg hover-lift border-l-4 border-[#009EDD]">
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#009EDD]/10 rounded-full flex items-center justify-center shrink-0">
-                        <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-[#009EDD]" />
+                <div className="space-y-3 sm:space-y-4 md:space-y-5 flex-1">
+                  <div className="bg-white p-3 sm:p-4 md:p-5 rounded-xl shadow-lg hover-lift border-l-4 border-[#5298C1]">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#FDF55A] rounded-full flex items-center justify-center shrink-0">
+                        <Phone className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#5298C1]" />
                       </div>
                       <div>
-                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 font-sans">Phone</h3>
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold text-[#0D031A] mb-0.5 sm:mb-1 font-sans">
+                          Phone
+                        </h3>
                         <a 
                           href="tel:+917600018281" 
-                          className="text-sm sm:text-base text-gray-700 hover:text-[#009EDD] transition-colors font-sans break-all"
+                          className="text-xs sm:text-sm md:text-base text-[#0D031A] hover:text-[#5298C1] transition-colors font-sans whitespace-nowrap"
                         >
                           +91 7600018281
                         </a>
@@ -344,16 +289,18 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div className="bg-white p-4 sm:p-5 md:p-6 rounded-xl shadow-lg hover-lift border-l-4 border-[#525A65]">
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#525A65]/10 rounded-full flex items-center justify-center shrink-0">
-                        <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-[#525A65]" />
+                  <div className="bg-white p-3 sm:p-4 md:p-5 rounded-xl shadow-lg hover-lift border-l-4 border-[#5298C1]">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#FDF55A] rounded-full flex items-center justify-center shrink-0">
+                        <Mail className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#5298C1]" />
                       </div>
                       <div>
-                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 font-sans">Email</h3>
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold text-[#0D031A] mb-0.5 sm:mb-1 font-sans">
+                          Email
+                        </h3>
                         <a 
                           href="mailto:info@softcool.in" 
-                          className="text-sm sm:text-base text-gray-700 hover:text-[#009EDD] transition-colors font-sans break-all"
+                          className="text-xs sm:text-sm md:text-base text-[#0D031A] hover:text-[#5298C1] transition-colors font-sans whitespace-nowrap"
                         >
                           info@softcool.in
                         </a>
@@ -361,14 +308,16 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div className="bg-white p-4 sm:p-5 md:p-6 rounded-xl shadow-lg hover-lift border-l-4 border-[#009EDD]">
+                  <div className="bg-white p-3 sm:p-4 md:p-5 rounded-xl shadow-lg hover-lift border-l-4 border-[#5298C1]">
                     <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#009EDD]/10 rounded-full flex items-center justify-center shrink-0">
-                        <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#009EDD]" />
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#FDF55A] rounded-full flex items-center justify-center shrink-0">
+                        <MapPin className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#5298C1]" />
                       </div>
                       <div>
-                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 font-sans">Shop Address</h3>
-                        <p className="text-sm sm:text-base text-gray-700 font-sans leading-relaxed">
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold text-[#0D031A] mb-1.5 font-sans">
+                          Shop Address
+                        </h3>
+                        <p className="text-xs sm:text-sm md:text-base text-[#0D031A] font-sans leading-relaxed">
                           Softcool, behind Vtrans Transport,<br />
                           Rajkot Ahmedabad Highway,<br />
                           Rajkot 360003
@@ -377,14 +326,16 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div className="bg-white p-4 sm:p-5 md:p-6 rounded-xl shadow-lg hover-lift border-l-4 border-[#525A65]">
+                  <div className="bg-white p-3 sm:p-4 md:p-5 rounded-xl shadow-lg hover-lift border-l-4 border-[#5298C1]">
                     <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#525A65]/10 rounded-full flex items-center justify-center shrink-0">
-                        <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#525A65]" />
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#FDF55A] rounded-full flex items-center justify-center shrink-0">
+                        <MapPin className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#5298C1]" />
                       </div>
                       <div>
-                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 font-sans">Registered Address</h3>
-                        <p className="text-sm sm:text-base text-gray-700 font-sans leading-relaxed">
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold text-[#0D031A] mb-1.5 font-sans">
+                          Registered Address
+                        </h3>
+                        <p className="text-xs sm:text-sm md:text-base text-[#0D031A] font-sans leading-relaxed">
                           Akshar Decor, 405, Shaligram Singet,<br />
                           Mota Mava, Speedwell Party Plot,<br />
                           Rajkot 360005
@@ -393,6 +344,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </AnimatedSection>
           </div>
@@ -400,59 +352,29 @@ export default function ContactPage() {
       </section>
 
       {/* Become a Distributor Section */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+      <section className="py-8 sm:py-12 bg-gradient-to-br from-[#FDF55A] via-[#FDF55A]/90 to-white relative overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#5298C1] rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#5298C1] rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 relative z-10">
           <AnimatedSection delay={300}>
-            <div className="bg-white rounded-xl shadow-xl p-6 sm:p-8 md:p-10 lg:p-12 border border-gray-200">
-              <div className="text-center mb-8 sm:mb-10 md:mb-12">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 font-sans">
-                  Become a Distributor
-                </h2>
-                <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-semibold mb-4 sm:mb-6 font-sans">
-                  Partner with us and bring SoftCool products to your region.
+            <div className="text-center">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#5298C1] mb-6 sm:mb-8 font-sans">
+                Become a Distributor
+              </h2>
+              <div className="max-w-3xl mx-auto mb-8 sm:mb-10">
+                <p className="text-base sm:text-lg text-[#0D031A] leading-relaxed font-sans">
+                  We are expanding our distribution network across India.
                 </p>
-                <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-sans">
-                  We are expanding our distribution network across India. If you are interested in becoming an authorized distributor, please get in touch with us. Our team will connect with you shortly.
+                <p className="text-base sm:text-lg text-[#0D031A] leading-relaxed font-sans mt-2">
+                  If you are interested in becoming an authorized distributor, please get in touch with us.
                 </p>
-              </div>
-
-              {/* Contact Details */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
-                <div className="bg-gradient-to-br from-[#009EDD]/10 to-[#009EDD]/5 rounded-lg p-4 sm:p-5 md:p-6 text-center border border-[#009EDD]/20">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#009EDD] rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                    <Phone className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                  </div>
-                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 font-sans">Phone</h3>
-                  <a 
-                    href="tel:+917600018281" 
-                    className="text-sm sm:text-base text-gray-700 hover:text-[#009EDD] transition-colors font-sans"
-                  >
-                    +91 7600018281
-                  </a>
-                </div>
-
-                <div className="bg-gradient-to-br from-[#525A65]/10 to-[#525A65]/5 rounded-lg p-4 sm:p-5 md:p-6 text-center border border-[#525A65]/20">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#525A65] rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                    <Mail className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                  </div>
-                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 font-sans">Email</h3>
-                  <a 
-                    href="mailto:info@softcool.in" 
-                    className="text-sm sm:text-base text-gray-700 hover:text-[#009EDD] transition-colors font-sans break-all"
-                  >
-                    info@softcool.in
-                  </a>
-                </div>
-
-                <div className="bg-gradient-to-br from-[#009EDD]/10 to-[#009EDD]/5 rounded-lg p-4 sm:p-5 md:p-6 text-center border border-[#009EDD]/20">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#009EDD] rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                    <MapPin className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                  </div>
-                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 font-sans">Office</h3>
-                  <p className="text-sm sm:text-base text-gray-700 font-sans">
-                  Rajkot, Gujarat, India
-                  </p>
-                </div>
+                <p className="text-base sm:text-lg text-[#0D031A] leading-relaxed font-sans mt-2">
+                  Our team will connect with you shortly.
+                </p>
               </div>
 
               {/* CTA Button */}
@@ -460,7 +382,7 @@ export default function ContactPage() {
                 <button
                   type="button"
                   onClick={() => setIsDistributorshipOpen(true)}
-                  className="bg-[#009EDD] text-white py-3 sm:py-4 md:py-5 px-8 sm:px-10 md:px-12 rounded-lg font-semibold text-base sm:text-lg md:text-xl transition-all font-sans hover:opacity-90 hover:shadow-xl transform hover:-translate-y-1"
+                  className="bg-[#5298C1] text-white py-3 sm:py-4 md:py-5 px-8 sm:px-10 md:px-12 rounded-lg font-semibold text-base sm:text-lg md:text-xl transition-all font-sans hover:bg-[#0D031A] hover:text-white hover:shadow-xl transform hover:-translate-y-1"
                 >
                   👉 Apply for Distributorship
                 </button>
@@ -469,9 +391,6 @@ export default function ContactPage() {
           </AnimatedSection>
         </div>
       </section>
-
-      {/* FAQ Section */}
-      <FAQ faqs={contactFAQs} />
 
       {/* Distributorship Popup Modal */}
       {isDistributorshipOpen && (
@@ -487,14 +406,14 @@ export default function ContactPage() {
             </button>
 
             {/* Modal Header */}
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6 font-sans">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#5298C1] mb-4 sm:mb-6 font-sans">
               Apply for Distributorship
             </h2>
 
             {/* Distributorship Form */}
             <form onSubmit={handleDistributorshipSubmit} className="space-y-4 sm:space-y-5">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5 font-sans">
+                <label htmlFor="name" className="block text-sm font-medium text-[#0D031A] mb-1.5 font-sans">
                   Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -504,8 +423,8 @@ export default function ContactPage() {
                   value={distributorshipData.name}
                   onChange={handleDistributorshipChange}
                   placeholder="Enter your name"
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-[#009EDD] transition-all font-sans text-sm sm:text-base ${
-                    distributorshipErrors.name ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm sm:text-base ${
+                    distributorshipErrors.name ? 'border-red-500' : 'border-[#5298C1]/30'
                   }`}
                 />
                 {distributorshipErrors.name && (
@@ -514,7 +433,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="contactNumber" className="block text-sm font-medium text-gray-700 mb-1.5 font-sans">
+                <label htmlFor="contactNumber" className="block text-sm font-medium text-[#0D031A] mb-1.5 font-sans">
                   Contact Number <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -525,8 +444,8 @@ export default function ContactPage() {
                   onChange={handleDistributorshipChange}
                   placeholder="Enter 10-digit contact number"
                   maxLength={10}
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-[#009EDD] transition-all font-sans text-sm sm:text-base ${
-                    distributorshipErrors.contactNumber ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm sm:text-base ${
+                    distributorshipErrors.contactNumber ? 'border-red-500' : 'border-[#5298C1]/30'
                   }`}
                 />
                 {distributorshipErrors.contactNumber && (
@@ -535,7 +454,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1.5 font-sans">
+                <label htmlFor="city" className="block text-sm font-medium text-[#0D031A] mb-1.5 font-sans">
                   City <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -545,8 +464,8 @@ export default function ContactPage() {
                   value={distributorshipData.city}
                   onChange={handleDistributorshipChange}
                   placeholder="Enter your city"
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-[#009EDD] transition-all font-sans text-sm sm:text-base ${
-                    distributorshipErrors.city ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm sm:text-base ${
+                    distributorshipErrors.city ? 'border-red-500' : 'border-[#5298C1]/30'
                   }`}
                 />
                 {distributorshipErrors.city && (
@@ -555,7 +474,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1.5 font-sans">
+                <label htmlFor="state" className="block text-sm font-medium text-[#0D031A] mb-1.5 font-sans">
                   State <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -565,8 +484,8 @@ export default function ContactPage() {
                   value={distributorshipData.state}
                   onChange={handleDistributorshipChange}
                   placeholder="Enter your state"
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-[#009EDD] focus:border-[#009EDD] transition-all font-sans text-sm sm:text-base ${
-                    distributorshipErrors.state ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-[#5298C1] focus:border-[#5298C1] transition-all font-sans text-sm sm:text-base ${
+                    distributorshipErrors.state ? 'border-red-500' : 'border-[#5298C1]/30'
                   }`}
                 />
                 {distributorshipErrors.state && (
@@ -577,14 +496,14 @@ export default function ContactPage() {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                 <button
                   type="submit"
-                  className="flex-1 bg-[#009EDD] text-white py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg font-semibold text-sm sm:text-base transition-all font-sans hover:opacity-90"
+                  className="flex-1 bg-[#FDF55A] text-[#0D031A] py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg font-semibold text-sm sm:text-base transition-all font-sans hover:bg-[#5298C1] hover:text-white"
                 >
                   Submit
                 </button>
                 <button
                   type="button"
                   onClick={handleCloseDistributorship}
-                  className="flex-1 bg-gray-200 text-gray-700 py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg font-semibold text-sm sm:text-base transition-all font-sans hover:bg-gray-300"
+                  className="flex-1 bg-gray-200 text-[#0D031A] py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg font-semibold text-sm sm:text-base transition-all font-sans hover:bg-gray-300"
                 >
                   Close
                 </button>

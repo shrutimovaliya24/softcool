@@ -1,6 +1,22 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/shared/page-hero";
 import AnimatedSection from "@/components/shared/animated-section";
 import { Lock, Database, Shield, Mail } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Softcool",
+  description:
+    "Read Softcool’s privacy policy to learn how we collect, use, and protect your personal data when you browse, shop, and contact us.",
+  alternates: {
+    canonical: "/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | Softcool",
+    description:
+      "Understand how Softcool handles your personal information, including order details, contact information, and marketing preferences.",
+    url: "/privacy",
+  },
+};
 
 export default function PrivacyPage() {
   return (
@@ -10,8 +26,8 @@ export default function PrivacyPage() {
         subtitle="How we collect, use, and protect your information"
       />
 
-      <section className="p-8 bg-white">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <section className="py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
           <AnimatedSection delay={100}>
             <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl mb-8 border-l-4 border-[#009EDD]">
               <p className="text-gray-600 font-sans mb-2">

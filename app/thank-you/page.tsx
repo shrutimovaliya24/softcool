@@ -1,7 +1,27 @@
+import type { Metadata } from "next";
 import Link from 'next/link';
 import { CheckCircle, Package, Mail } from 'lucide-react';
 import PageHero from "@/components/shared/page-hero";
 import AnimatedSection from "@/components/shared/animated-section";
+
+export const metadata: Metadata = {
+  title: "Order Confirmed | Thank You for Shopping with Softcool",
+  description:
+    "Your Softcool order has been placed successfully. Check your email for order confirmation and shipping updates.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+  alternates: {
+    canonical: "/thank-you",
+  },
+  openGraph: {
+    title: "Order Confirmed | Softcool",
+    description:
+      "Thank you for choosing Softcool pillows and comfort products. Your order is confirmed and will be processed shortly.",
+    url: "/thank-you",
+  },
+};
 
 export default function ThankYouPage() {
   return (

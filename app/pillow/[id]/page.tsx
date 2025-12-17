@@ -17,7 +17,6 @@ import { productFAQs as productFAQData } from "@/lib/faq-data";
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'information' | 'care' | 'support'>('information');
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const router = useRouter();
   const { addToCart } = useCart();
   const { isAuthenticated } = useAuth();
@@ -91,6 +90,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   };
 
   const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      router.push('/login');
+      return;
+    }
     for (let i = 0; i < quantity; i++) {
       addToCart({
         id: productData.id,
@@ -105,7 +108,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   const handleBuyNow = () => {
     if (!isAuthenticated) {
-      setShowLoginPopup(true);
+      router.push('/login');
       return;
     }
     // Add to cart first
@@ -125,25 +128,33 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   return (
     <div className="min-h-screen bg-white">
       {/* Breadcrumbs */}
-      <div className="p-4 bg-gray-50 border-b">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
-          <div className="flex items-center gap-2 text-sm text-gray-600 font-sans">
-            <Link href="/" className="hover:text-[#009EDD] transition-colors">Home</Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-gray-900">{productData.name}</span>
+      <div className="py-4 bg-white border-b border-[#5298C1]/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-[#0D031A] font-sans flex-wrap">
+            <Link href="/" className="hover:text-[#5298C1] transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-[#5298C1]" />
+            <Link href="/collections" className="hover:text-[#5298C1] transition-colors">
+              Products
+            </Link>
+            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-[#5298C1]" />
+            <span className="text-[#0D031A] break-words">
+              {productData.name}
+            </span>
           </div>
         </div>
       </div>
 
       {/* Product Detail */}
-      <section className="p-8">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <section className="py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
           {/* Previous/Next Navigation */}
           <div className="flex justify-between items-center mb-6">
             {previousProduct && (
               <Link
                 href={`/pillow/${previousProduct.id}`}
-                className="flex items-center gap-2 text-gray-600 hover:text-[#009EDD] transition-colors font-sans"
+                className="flex items-center gap-2 text-[#0D031A] hover:text-[#5298C1] transition-colors font-sans"
               >
                 <ChevronLeft className="w-5 h-5" />
                 <span className="hidden md:inline">Previous</span>
@@ -154,7 +165,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             {nextProduct && (
               <Link
                 href={`/pillow/${nextProduct.id}`}
-                className="flex items-center gap-2 text-gray-600 hover:text-[#009EDD] transition-colors font-sans ml-auto"
+                className="flex items-center gap-2 text-[#0D031A] hover:text-[#5298C1] transition-colors font-sans ml-auto"
               >
                 <span className="hidden md:inline">Next</span>
                 <ChevronRight className="w-5 h-5" />
@@ -162,7 +173,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             )}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Product Image Gallery */}
             <AnimatedSection delay={100}>
               <ProductImageGallery 
@@ -177,53 +188,53 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <AnimatedSection delay={200}>
               <div className="text-left">
                 {/* Product Name */}
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-sans">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#5298C1] mb-3 sm:mb-4 font-sans">
                   {productData.name}
                 </h1>
                 
                 {/* Price */}
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                   {productData.originalPrice && (
-                    <span className="text-2xl text-gray-500 line-through font-sans">
+                  <span className="text-xl sm:text-2xl text-[#5A646E] line-through font-sans">
                       ₹{productData.originalPrice.toLocaleString()}
                     </span>
                   )}
-                  <span className={`text-4xl font-bold font-sans ${productData.originalPrice ? 'text-green-600' : 'text-[#009EDD]'}`}>
+                  <span className={`text-2xl sm:text-3xl md:text-4xl font-bold font-sans ${productData.originalPrice ? 'text-[#5298C1]' : 'text-[#5298C1]'}`}>
                     ₹{productData.price.toLocaleString()}
                   </span>
                 </div>
                 
-                <p className="text-gray-600 mb-6 font-sans">{sku}</p>
+                <p className="text-[#0D031A] mb-6 font-sans">{sku}</p>
 
-                <p className="text-base text-gray-700 mb-8 leading-relaxed font-sans">
+                <p className="text-sm sm:text-base text-[#0D031A] mb-8 leading-relaxed font-sans">
                   {description}
                 </p>
 
                 {/* Quantity Selector */}
                 <div className="mb-8">
-                  <label className="block text-sm font-medium text-gray-700 mb-2 font-sans">Quantity</label>
+                  <label className="block text-sm font-medium text-[#0D031A] mb-2 font-sans">Quantity</label>
                   <div className="flex items-center gap-4">
-                    <div className="flex items-center border-2 border-gray-300 rounded-lg">
+                    <div className="flex items-center border-2 border-[#5298C1]/30 rounded-lg">
                       <button
                         onClick={() => handleQuantityChange(-1)}
-                        className="p-2 hover:bg-gray-100 transition-colors"
+                        className="p-2 hover:bg-[#FDF55A] transition-colors"
                         aria-label="Decrease quantity"
                       >
-                        <Minus className="w-4 h-4" />
+                        <Minus className="w-4 h-4 text-[#5298C1]" />
                       </button>
                       <input
                         type="number"
                         value={quantity}
                         onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                        className="w-16 text-center border-0 focus:ring-0 font-sans"
+                        className="w-16 text-center border-0 focus:ring-0 font-sans text-[#0D031A]"
                         min="1"
                       />
                       <button
                         onClick={() => handleQuantityChange(1)}
-                        className="p-2 hover:bg-gray-100 transition-colors"
+                        className="p-2 hover:bg-[#FDF55A] transition-colors"
                         aria-label="Increase quantity"
                       >
-                        <Plus className="w-4 h-4" />
+                        <Plus className="w-4 h-4 text-[#5298C1]" />
                       </button>
                     </div>
                   </div>
@@ -233,14 +244,14 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <div className="space-y-4 mb-6">
                   <button 
                     onClick={handleAddToCart}
-                    className="w-full bg-white border-2 border-gray-800 text-gray-800 py-4 px-6 rounded-lg font-semibold text-lg transition-all font-sans hover:bg-gray-800 hover:text-white flex items-center justify-center gap-2"
+                    className="w-full bg-[#FDF55A] text-[#0D031A] py-4 px-6 rounded-lg font-semibold text-lg transition-all font-sans hover:bg-[#5298C1] hover:text-white flex items-center justify-center gap-2"
                   >
                     <ShoppingCart className="w-5 h-5" />
                     Add to Cart
                   </button>
                   <button
                     onClick={handleBuyNow}
-                    className="w-full bg-[#525A65] text-white py-4 px-6 rounded-lg font-semibold text-lg transition-all font-sans hover:opacity-90"
+                    className="w-full bg-[#5298C1] text-white py-4 px-6 rounded-lg font-semibold text-lg transition-all font-sans hover:bg-[#0D031A]"
                   >
                     Buy Now
                   </button>
@@ -253,38 +264,38 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       </section>
 
       {/* Product Information Tabs */}
-      <section className="p-8 bg-white">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <section className="py-8 sm:py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
           <AnimatedSection delay={300}>
             {/* Tabs */}
-            <div className="border-b border-gray-200 mb-6">
-              <div className="flex gap-4">
+            <div className="border-b border-[#5298C1]/20 mb-4 sm:mb-6">
+              <div className="flex gap-2 sm:gap-4 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
                 <button
                   onClick={() => setActiveTab('information')}
-                  className={`px-6 py-3 font-semibold text-sm font-sans transition-colors border-b-2 ${
+                  className={`whitespace-nowrap px-4 sm:px-5 py-2 sm:py-3 font-semibold text-xs sm:text-sm font-sans transition-colors border-b-2 ${
                     activeTab === 'information'
-                      ? 'border-[#009EDD] text-[#009EDD]'
-                      : 'border-transparent text-gray-600 hover:text-gray-900'
+                      ? 'border-[#5298C1] text-[#5298C1]'
+                      : 'border-transparent text-[#0D031A] hover:text-[#5298C1]'
                   }`}
                 >
                   Information
                 </button>
                 <button
                   onClick={() => setActiveTab('care')}
-                  className={`px-6 py-3 font-semibold text-sm font-sans transition-colors border-b-2 ${
+                  className={`whitespace-nowrap px-4 sm:px-5 py-2 sm:py-3 font-semibold text-xs sm:text-sm font-sans transition-colors border-b-2 ${
                     activeTab === 'care'
-                      ? 'border-[#009EDD] text-[#009EDD]'
-                      : 'border-transparent text-gray-600 hover:text-gray-900'
+                      ? 'border-[#5298C1] text-[#5298C1]'
+                      : 'border-transparent text-[#0D031A] hover:text-[#5298C1]'
                   }`}
                 >
                   Care Instructions
                 </button>
                 <button
                   onClick={() => setActiveTab('support')}
-                  className={`px-6 py-3 font-semibold text-sm font-sans transition-colors border-b-2 ${
+                  className={`whitespace-nowrap px-4 sm:px-5 py-2 sm:py-3 font-semibold text-xs sm:text-sm font-sans transition-colors border-b-2 ${
                     activeTab === 'support'
-                      ? 'border-[#009EDD] text-[#009EDD]'
-                      : 'border-transparent text-gray-600 hover:text-gray-900'
+                      ? 'border-[#5298C1] text-[#5298C1]'
+                      : 'border-transparent text-[#0D031A] hover:text-[#5298C1]'
                   }`}
                 >
                   Support
@@ -296,8 +307,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <div className="py-6">
               {activeTab === 'information' && (
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 font-sans">Product Information</h3>
-                  <ul className="space-y-3 text-gray-700 font-sans">
+                  <h3 className="text-xl font-bold text-[#5298C1] mb-4 font-sans">Product Information</h3>
+                  <ul className="space-y-3 text-[#0D031A] font-sans">
                     <li className="flex items-start gap-3">
                       <span className="font-semibold min-w-[120px]">Shape:</span>
                       <span>Square</span>
@@ -324,8 +335,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
               {activeTab === 'care' && (
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 font-sans">Care Instructions</h3>
-                  <ul className="space-y-3 text-gray-700 font-sans list-disc list-inside">
+                  <h3 className="text-xl font-bold text-[#5298C1] mb-4 font-sans">Care Instructions</h3>
+                  <ul className="space-y-3 text-[#0D031A] font-sans list-disc list-inside">
                     <li>Remove the outer cover before washing.</li>
                     <li>Machine wash the cover in cold water on a gentle cycle.</li>
                     <li>Do not wash or wet the memory foam core — spot clean only with a mild damp cloth if needed.</li>
@@ -338,11 +349,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
               {activeTab === 'support' && (
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 font-sans">Support</h3>
+                  <h3 className="text-xl font-bold text-[#5298C1] mb-4 font-sans">Support</h3>
                   <div className="space-y-6">
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-2 font-sans">24/7 Customer Support</h4>
-                      <p className="text-gray-700 font-sans">
+                      <h4 className="font-semibold text-[#0D031A] mb-2 font-sans">24/7 Customer Support</h4>
+                      <p className="text-[#0D031A] font-sans">
                         We're here to help you anytime, day or night. Contact us for any questions or concerns about your product.
                       </p>
                     </div>
@@ -379,9 +390,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       </section>
 
       {/* Service Section */}
-      <section className="p-8 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="py-8 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 lg:px-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatedSection delay={400}>
               <div className="bg-white p-6 rounded-xl shadow-lg hover-lift text-center border-l-4 border-[#009EDD]">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2 font-sans">Free Shipping</h3>
@@ -407,11 +418,13 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       </section>
 
       {/* Store Products (Related Products) */}
-      <section className="p-8 bg-white">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <section className="py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 lg:px-10">
           <AnimatedSection delay={700}>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-600 mb-4 font-sans">Related Products</h2>
+            <div className="text-center mb-8 sm:mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-600 mb-3 sm:mb-4 font-sans">
+                Related Products
+              </h2>
               <div className="w-24 h-1 bg-[#009EDD] mx-auto rounded-full"></div>
             </div>
           </AnimatedSection>
@@ -452,33 +465,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
       {/* FAQ Section */}
       <FAQ faqs={productFAQData} />
-
-      {/* Login Popup */}
-      {showLoginPopup && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-4 font-sans">Please Login</h3>
-            <p className="text-gray-700 mb-6 font-sans">
-              You need to be logged in to proceed with the purchase. Please login to continue.
-            </p>
-            <div className="flex gap-3">
-              <Link
-                href="/login"
-                className="flex-1 text-center bg-[#009EDD] text-white py-2.5 px-6 rounded-lg font-semibold transition-all font-sans hover:opacity-90"
-                onClick={() => setShowLoginPopup(false)}
-              >
-                Go to Login
-              </Link>
-              <button
-                onClick={() => setShowLoginPopup(false)}
-                className="flex-1 bg-gray-200 text-gray-700 py-2.5 px-6 rounded-lg font-semibold transition-all font-sans hover:bg-gray-300"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

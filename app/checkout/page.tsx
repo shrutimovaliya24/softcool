@@ -117,8 +117,8 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-white">
         <PageHero title="Checkout" subtitle="Complete your order" />
-        <section className="p-8 bg-white">
-          <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 text-center py-16">
+        <section className="py-8 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 text-center py-12 sm:py-16">
             <h2 className="text-2xl font-bold text-gray-900 mb-4 font-sans">Please Login</h2>
             <p className="text-gray-600 mb-8 font-sans">You need to be logged in to proceed with checkout.</p>
             <div className="flex gap-4 justify-center">
@@ -146,8 +146,8 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-white">
         <PageHero title="Checkout" subtitle="Complete your order" />
-        <section className="p-8 bg-white">
-          <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 text-center py-16">
+        <section className="py-8 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 text-center py-12 sm:py-16">
             <h2 className="text-2xl font-bold text-gray-900 mb-4 font-sans">Your cart is empty</h2>
             <p className="text-gray-600 mb-8 font-sans">Please add items to your cart before checkout.</p>
             <Link
@@ -167,8 +167,8 @@ export default function CheckoutPage() {
     <div className="min-h-screen bg-white">
       <PageHero title="Checkout" subtitle="Complete your order" />
       
-      <section className="p-8 bg-white">
-        <div className="max-w-[10000px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <section className="py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
           <Link
             href="/cart"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-[#009EDD] transition-colors mb-6 font-sans"

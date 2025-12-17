@@ -68,6 +68,11 @@ export const testimonials = [
     quote: "I'm so glad I decided to try the Softcool pillow. It's like sleeping on a cloud! The cooling gel keeps me comfortable all night long, and the pillow provides excellent support for my head and neck. I've noticed a significant improvement. It's a must-have for anyone looking for a luxurious and restful sleep.",
     author: "Nisha Soni",
     image: "/img/testimonial-3.jpg"
+  },
+  {
+    quote: "Best pillow I've ever owned! The Softcool pillow has transformed my sleep experience. The cooling effect is amazing, and it stays cool throughout the night. The support is perfect for my neck, and I wake up feeling refreshed every morning. Worth every penny!",
+    author: "Rajesh Kumar",
+    image: "/img/testimonial-4.jpg"
   }
 ];
 

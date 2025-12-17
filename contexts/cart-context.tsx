@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 
 export interface CartItem {
   id: number;
@@ -22,6 +23,7 @@ interface CartContextType {
   favorites: number[];
   toggleFavorite: (id: number) => void;
   isFavorite: (id: number) => boolean;
+  requireAuth: () => boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -29,6 +31,12 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [favorites, setFavorites] = useState<number[]>([]);
+  
+  const requireAuth = (): boolean => {
+    if (typeof window === 'undefined') return false;
+    const user = localStorage.getItem('user');
+    return !!user;
+  };
 
   // Load cart and favorites from localStorage on mount
   useEffect(() => {
@@ -65,6 +73,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [favorites]);
 
   const addToCart = (item: Omit<CartItem, 'quantity'>) => {
+    if (!requireAuth()) {
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login';
+      }
+      return;
+    }
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((i) => i.id === item.id);
       if (existingItem) {
@@ -105,6 +119,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleFavorite = (id: number) => {
+    if (!requireAuth()) {
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login';
+      }
+      return;
+    }
     setFavorites((prev) => {
       if (prev.includes(id)) {
         return prev.filter((favId) => favId !== id);
@@ -130,6 +150,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         favorites,
         toggleFavorite,
         isFavorite,
+        requireAuth,
       }}
     >
       {children}
