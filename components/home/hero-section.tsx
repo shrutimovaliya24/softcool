@@ -107,7 +107,7 @@ export default function HeroSection() {
       >
         {heroSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="relative w-full min-h-[480px] sm:min-h-[520px] lg:min-h-[640px]">
+            <div className="relative w-full min-h-[420px] sm:min-h-[520px] lg:min-h-[640px]">
               {/* Background Image */}
               <div className="absolute inset-0">
                 <Image
@@ -123,7 +123,7 @@ export default function HeroSection() {
               </div>
 
               {/* Content Overlay */}
-              <div className="relative z-10 h-full flex items-end sm:items-center pb-10 sm:pb-16 pt-20 sm:pt-16 md:pt-20">
+              <div className="relative z-10 h-full flex items-end sm:items-center pb-8 sm:pb-16 pt-16 sm:pt-16 md:pt-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 w-full">
                   {/* Slide 1: Brand Promise - Centered */}
                   {slide.type === "brand" && (
@@ -148,7 +148,7 @@ export default function HeroSection() {
 
                   {/* Slide 2: Key Features - Content Wise (Left Aligned) */}
                   {slide.type === "features" && (
-                    <div className="max-w-2xl text-left relative z-20 ml-4 sm:ml-8 md:ml-12 lg:ml-16">
+                    <div className="w-full max-w-full md:max-w-2xl text-left relative z-20 ml-0 sm:ml-4 md:ml-8 lg:ml-16">
                       <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight font-sans tracking-tight mb-4 sm:mb-6 md:mb-8">
                         <span className="text-white">{slide.title}</span>
                       </h1>
@@ -175,7 +175,7 @@ export default function HeroSection() {
 
                   {/* Slide 3: Social Proof - Content Wise (Left Aligned) */}
                   {slide.type === "social" && (
-                    <div className="max-w-2xl text-left relative z-20 ml-4 sm:ml-8 md:ml-12 lg:ml-16">
+                    <div className="w-full max-w-full md:max-w-2xl text-left relative z-20 ml-0 sm:ml-4 md:ml-8 lg:ml-16">
                       <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight font-sans tracking-tight mb-3 sm:mb-4">
                         {slide.title}
                       </h1>

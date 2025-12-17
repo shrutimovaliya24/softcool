@@ -225,3 +225,10 @@ select:focus option:checked {
   background-color: #5298C1 !important;
   color: white !important;
 }
+
+/* Make all input / textarea placeholders darker for better readability */
+input::placeholder,
+textarea::placeholder {
+  color: #4B5563; /* Tailwind gray-600 */
+  opacity: 1;
+}

@@ -75,8 +75,8 @@ export default function FeaturesSection({ features, detailedFeatures }: Features
               // Alternating pattern: Yellow, Light Blue, Yellow, Light Blue, Yellow, Light Blue
               const isYellow = index % 2 === 0;
               const bgColor = isYellow ? 'bg-[#FDF55A]' : 'bg-[#5298C1]';
-              const textColor = isYellow ? 'text-[#0D031A]' : 'text-white';
-              const iconColor = isYellow ? 'text-[#0D031A]' : 'text-white';
+              const textColorClass = isYellow ? 'text-[#0D031A]' : 'text-white';
+              const iconColorClass = isYellow ? 'text-[#0D031A]' : 'text-white';
 
               return (
                 <div
@@ -85,17 +85,17 @@ export default function FeaturesSection({ features, detailedFeatures }: Features
                 >
                   <div className="flex flex-col items-center text-center space-y-3 sm:space-y-4 relative z-10">
                     {/* Icon */}
-                    <div className={`relative ${iconColor}`}>
+                    <div className={`relative ${iconColorClass}`}>
                       <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 stroke-2" />
                     </div>
                     
                     {/* Title */}
-                    <h3 className={`text-base sm:text-lg md:text-xl font-bold ${textColor} font-sans leading-tight`}>
+                    <h3 className={`text-base sm:text-lg md:text-xl font-bold ${textColorClass} font-sans leading-tight`}>
                       {feature.title}
                     </h3>
                     
                     {/* Description */}
-                    <p className={`text-xs sm:text-sm ${textColor}/90 font-sans leading-relaxed`}>
+                    <p className={`text-xs sm:text-sm ${isYellow ? 'text-[#0D031A]' : 'text-white'} font-sans leading-relaxed`}>
                       {feature.description}
                     </p>
                   </div>

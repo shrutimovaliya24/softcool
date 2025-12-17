@@ -30,10 +30,19 @@ export default function BestSellersSection() {
           {bestSellers.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group border border-[#5298C1]/20"
+              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group border border-[#5298C1]/20 flex flex-col h-full"
             >
+              {/* Badge row above image so it sits outside the picture on all sizes */}
+              {product.badge && (
+                <div className="px-3 sm:px-4 pt-3">
+                  <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-[#FDF55A] text-[#0D031A] text-xs sm:text-sm font-semibold font-sans shadow-sm">
+                    {product.badge}
+                  </span>
+                </div>
+              )}
+
               {/* Product Image */}
-              <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden bg-gray-100">
+              <div className="relative mt-3 h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden bg-white">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -42,15 +51,10 @@ export default function BestSellersSection() {
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
                   quality={90}
                 />
-                {product.badge && (
-                  <div className="absolute top-3 left-3 bg-[#CFC753] text-white px-3 py-1 rounded-full text-xs sm:text-sm font-semibold font-sans">
-                    {product.badge}
-                  </div>
-                )}
               </div>
 
               {/* Product Info */}
-              <div className="p-3 sm:p-4 md:p-5 space-y-2 sm:space-y-3">
+              <div className="p-3 sm:p-4 md:p-5 space-y-2 sm:space-y-3 flex-1 flex flex-col">
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#0D031A] font-sans leading-tight">
                   {product.name}
                 </h3>

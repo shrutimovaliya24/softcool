@@ -32,13 +32,27 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
   };
 
   useEffect(() => {
-    const clickOutside = (e: MouseEvent) => {
+    // Close the profile menu when clicking anywhere outside it
+    const handleClickOutside = (e: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
         setShowUserMenu(false);
       }
     };
-    if (showUserMenu) document.addEventListener('mousedown', clickOutside);
-    return () => document.removeEventListener('mousedown', clickOutside);
+
+    // Also close the profile menu when the user scrolls the page
+    const handleScroll = () => {
+      setShowUserMenu(false);
+    };
+
+    if (showUserMenu) {
+      document.addEventListener('click', handleClickOutside);
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [showUserMenu]);
 
   return (
@@ -52,7 +66,7 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
               className="p-2 rounded-md hover:bg-gray-100 transition"
               aria-label="Open sidebar"
             >
-              <Menu className="w-6 h-6 text-[#5298C1]" />
+              <Menu className="w-6 h-6 sm:w-7 sm:h-7 text-[#5298C1]" />
             </button>
           </div>
 
@@ -95,7 +109,7 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
           </nav>
 
           {/* Login & Cart Section - Right */}
-          <div className="flex items-center justify-end gap-3 sm:gap-4 md:gap-5 ml-auto shrink-0">
+          <div className="flex items-center justify-end gap-2 sm:gap-4 md:gap-5 ml-auto shrink-0">
             {isAuthenticated ? (
               <div className="relative" ref={userMenuRef}>
                 {/* Desktop User Button */}
@@ -125,27 +139,31 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
 
                 {/* Dropdown */}
                 {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border py-2 animate-fade-in z-50">
-                    <div className="px-4 py-2 border-b">
-                      <p className="text-sm font-semibold text-gray-900">{user?.name}</p>
-                      <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+                  <div className="absolute right-0 mt-2 w-52 bg-white/95 rounded-xl shadow-xl border border-[#5298C1]/20 py-2 animate-fade-in z-50 backdrop-blur-sm">
+                    <div className="px-4 py-3 border-b border-[#5298C1]/15 bg-[#5298C1]/5">
+                      <p className="text-sm font-semibold text-[#0D031A] font-sans">
+                        {user?.name}
+                      </p>
+                      <p className="text-xs text-[#5A646E] truncate font-sans">
+                        {user?.email}
+                      </p>
                     </div>
 
                     <Link
                       href="/orders"
                       onClick={() => setShowUserMenu(false)}
-                      className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors font-sans"
                     >
-                      <Package className="w-4 h-4" /> My Orders
+                      <Package className="w-4 h-4 text-[#5298C1]" /> My Orders
                     </Link>
 
                     <Link
                       href="/favorites"
                       onClick={() => setShowUserMenu(false)}
-                      className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100 relative"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors relative font-sans"
                     >
                       <Heart className={`w-4 h-4 ${
-                        favorites.length > 0 ? "fill-red-500 text-red-500" : "text-gray-700"
+                        favorites.length > 0 ? "fill-red-500 text-red-500" : "text-[#5298C1]"
                       }`} /> 
                       <span>My Favorites</span>
                       {favorites.length > 0 && (
@@ -157,9 +175,9 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
 
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors font-sans"
                     >
-                      <LogOut className="w-4 h-4" /> Logout
+                      <LogOut className="w-4 h-4 text-[#5298C1]" /> Logout
                     </button>
                   </div>
                 )}
@@ -171,7 +189,7 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
                   href="/login"
                   className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 text-[#5298C1] font-medium"
                 >
-                  <User className="w-5 h-5" />
+                  <User className="w-6 h-6 sm:w-7 sm:h-7" />
                   <span>Login</span>
                 </Link>
 
@@ -184,7 +202,7 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
 
             {/* Cart */}
             <Link href="/cart" className="relative p-2 hover:bg-gray-100 rounded-md">
-              <ShoppingCart className="w-6 md:w-7 h-6 md:h-7 text-[#5298C1]" />
+              <ShoppingCart className="w-6 h-6 sm:w-7 sm:h-7 text-[#5298C1]" />
               {getTotalItems() > 0 && (
                 <span className="absolute -top-1 -right-1 bg-[#5298C1] text-white text-xs font-bold rounded-full w-5 h-5 flex justify-center items-center">
                   {getTotalItems() > 9 ? "9+" : getTotalItems()}
