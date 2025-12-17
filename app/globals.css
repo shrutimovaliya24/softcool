@@ -246,3 +246,10 @@ textarea::placeholder {
   color: #4B5563; /* Tailwind gray-600 */
   opacity: 1;
 }
+
+/* Use theme blue for input/select/textarea text and numeric values (e.g., quantity) */
+input,
+textarea,
+select {
+  color: #5298C1;
+}

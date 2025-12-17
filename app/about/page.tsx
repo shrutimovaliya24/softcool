@@ -48,9 +48,9 @@ export default function AboutPage() {
             <AnimatedSection delay={200}>
               <div className="relative">
                 <div className="flex flex-col md:flex-row items-start gap-6 sm:gap-8">
-                  <div className="shrink-0 w-full md:w-auto flex md:block justify-center md:justify-start mb-3 md:mb-0">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-[#5298C1] rounded-2xl flex items-center justify-center shadow-lg">
-                      <Heart className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
+                  <div className="shrink-0 w-full md:w-auto flex md:block justify-start mb-3 md:mb-0">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-[#5298C1] rounded-2xl flex items-center justify-center shadow-lg">
+                      <Heart className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white" />
                     </div>
                   </div>
                   <div className="flex-1 bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg border-l-4 border-[#5298C1] h-full min-h-[180px] sm:min-h-[220px] flex flex-col">
@@ -71,12 +71,12 @@ export default function AboutPage() {
             <AnimatedSection delay={300}>
               <div className="relative">
                 <div className="flex flex-col md:flex-row items-start gap-6 sm:gap-8">
-                  <div className="shrink-0 w-full md:w-auto order-2 md:order-1 flex md:block justify-center md:justify-start mb-3 md:mb-0">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-[#FDF55A] rounded-2xl flex items-center justify-center shadow-lg">
-                      <Award className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-[#0D031A]" />
+                  <div className="shrink-0 w-full md:w-auto flex md:block justify-start mb-3 md:mb-0">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-[#FDF55A] rounded-2xl flex items-center justify-center shadow-lg">
+                      <Award className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#0D031A]" />
                     </div>
                   </div>
-                  <div className="flex-1 bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg border-l-4 border-[#FDF55A] order-1 md:order-2 h-full min-h-[180px] sm:min-h-[220px] flex flex-col">
+                  <div className="flex-1 bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg border-l-4 border-[#FDF55A] h-full min-h-[180px] sm:min-h-[220px] flex flex-col">
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0D031A] mb-4 sm:mb-5 font-sans leading-tight">
                       Our Journey
                     </h3>
@@ -107,8 +107,8 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
             <AnimatedSection delay={500}>
               <div className="bg-white p-5 sm:p-7 md:p-9 rounded-xl shadow-lg hover-lift border-l-4 border-[#5298C1] h-full min-h-[320px] sm:min-h-[380px] md:min-h-[400px] flex flex-col">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#FDF55A] rounded-full flex items-center justify-center mb-4 sm:mb-5 md:mb-6 mx-auto md:mx-0">
-                  <Target className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[#5298C1]" />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-[#FDF55A] rounded-full flex items-center justify-center mb-4 sm:mb-5 md:mb-6">
+                  <Target className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#5298C1]" />
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0D031A] mb-3 sm:mb-4 md:mb-5 font-sans leading-tight">Our Mission</h3>
                 <div className="flex-1 flex flex-col">
@@ -127,8 +127,8 @@ export default function AboutPage() {
 
             <AnimatedSection delay={600}>
               <div className="bg-white p-5 sm:p-7 md:p-9 rounded-xl shadow-lg hover-lift border-l-4 border-[#5298C1] h-full min-h-[320px] sm:min-h-[380px] md:min-h-[400px] flex flex-col">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#FDF55A] rounded-full flex items-center justify-center mb-4 sm:mb-5 md:mb-6 mx-auto md:mx-0">
-                  <Target className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[#5298C1]" />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-[#FDF55A] rounded-full flex items-center justify-center mb-4 sm:mb-5 md:mb-6">
+                  <Target className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#5298C1]" />
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0D031A] mb-3 sm:mb-4 md:mb-5 font-sans leading-tight">Our Vision</h3>
                 <div className="flex-1 flex flex-col">
