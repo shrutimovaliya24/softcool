@@ -88,14 +88,14 @@ export default function OurCollectionSection() {
                   {/* Product Image - Clickable */}
                   <Link
                     href={`/pillow/${product.id}`}
-                    className="relative mt-1 h-56 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-white block"
+                    className="relative mt-1 h-64 sm:h-72 md:h-80 lg:h-80 overflow-hidden bg-white block"
                   >
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="object-contain scale-125 transition-transform duration-300 group-hover:scale-135"
                       quality={90}
                     />
                   </Link>
