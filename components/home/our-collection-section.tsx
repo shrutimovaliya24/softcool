@@ -78,7 +78,7 @@ export default function OurCollectionSection() {
                 <div className="bg-white rounded-xl overflow-hidden transition-all duration-300 group h-full flex flex-col">
                   {/* Badge above image for consistent gap on all sizes */}
                   {product.badge && (
-                    <div className="px-3 sm:px-4 pt-3">
+                    <div className="px-3 sm:px-4 pt-2">
                       <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-[#FDF55A] text-[#0D031A] text-xs sm:text-sm font-semibold font-sans shadow-sm">
                         {product.badge}
                       </span>
@@ -88,14 +88,14 @@ export default function OurCollectionSection() {
                   {/* Product Image - Clickable */}
                   <Link
                     href={`/pillow/${product.id}`}
-                    className="relative mt-3 h-52 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-white block"
+                    className="relative mt-1 h-56 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-white block"
                   >
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-contain transition-transform duration-300 group-hover:scale-105"
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
                       quality={90}
                     />
                   </Link>
