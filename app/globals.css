@@ -36,9 +36,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling and force light color scheme (fixes dark-mode input placeholders) */
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 /* GPU acceleration for transforms */
@@ -208,6 +209,11 @@ img, video {
 }
 
 /* Custom Select Dropdown Styling */
+select {
+  background-color: #ffffff;
+  color: #0D031A;
+}
+
 select option {
   background-color: white;
   color: #0D031A;

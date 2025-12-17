@@ -244,14 +244,18 @@ export default function ProductReviews({ productId, reviews: initialReviews }: P
         {/* Reviews List */}
         <div className="space-y-6">
           {filteredReviews.length === 0 ? (
-            <p className="text-gray-600 text-center py-8 font-sans">No reviews yet. Be the first to review!</p>
+            <p className="text-sm sm:text-base text-gray-600 text-center py-8 font-sans">
+              No reviews yet. Be the first to review!
+            </p>
           ) : (
             filteredReviews.map((review) => (
               <div key={review.id} className="border-b border-gray-200 pb-6 last:border-0">
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <h4 className="font-semibold text-gray-900 font-sans">{review.reviewer}</h4>
-                    <p className="text-sm text-gray-500 font-sans">{review.date}</p>
+                    <h4 className="text-sm sm:text-base font-semibold text-gray-900 font-sans">
+                      {review.reviewer}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-gray-500 font-sans">{review.date}</p>
                   </div>
                   <div className="flex items-center">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -266,8 +270,12 @@ export default function ProductReviews({ productId, reviews: initialReviews }: P
                     ))}
                   </div>
                 </div>
-                <h5 className="font-semibold text-gray-900 mb-2 font-sans">{review.headline}</h5>
-                <p className="text-gray-700 mb-3 font-sans">{review.body}</p>
+                <h5 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 font-sans">
+                  {review.headline}
+                </h5>
+                <p className="text-sm sm:text-base text-gray-700 mb-3 font-sans">
+                  {review.body}
+                </p>
                 <button
                   onClick={() => handleHelpful(review.id)}
                   className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors font-sans"
