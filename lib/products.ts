@@ -23,8 +23,8 @@ export const allProducts: Product[] = [
   {
     id: 1,
     name: "Doctor Pillow",
-    price: 1250,
-    originalPrice: 2500,
+    price: 1599,
+    originalPrice: 2599,
     badge: "Best Seller",
     image: "/img/doctor-pillow.jpg",
     images: [
@@ -39,7 +39,7 @@ export const allProducts: Product[] = [
   {
     id: 2,
     name: "Paradise Pillow",
-    price: 999,
+    price: 1199,
     badge: "Best Seller",
     image: "/img/paradise-pillow.jpg",
     images: [
@@ -55,8 +55,8 @@ export const allProducts: Product[] = [
   {
     id: 3,
     name: "Neem Plus Pillow",
-    price: 1500,
-    originalPrice: 2000,
+    price: 1799,
+    originalPrice: 2499,
     badge: "Best Seller",
     image: "/img/neem-plus-pillow.jpg",
     images: ["/img/neem-plus-pillow.jpg", "/img/neem-plus-pillow-2.jpg", "/img/neem-plus-pillow-3.jpg", "/img/neem-plus-pillow-4.jpg", "/img/neem-plus-pillow-5.jpg"],
@@ -66,7 +66,7 @@ export const allProducts: Product[] = [
   {
     id: 4,
     name: "Heritage Pillow",
-    price: 899,
+    price: 999,
     badge: "Best Seller",
     image: "/img/heritage-pillow.jpg",
     images: ["/img/heritage-pillow.jpg", "/img/heritage-pillow-2.jpg", "/img/heritage-pillow-3.jpg", "/img/heritage-pillow-4.jpg"],

@@ -49,7 +49,7 @@ export default function CartPage() {
                   <AnimatedSection key={`${item.id}-${index}`} delay={index * 100}>
                     <div className="bg-white p-5 sm:p-6 rounded-xl shadow-lg hover-lift border border-[#5298C1]/20">
                       <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start w-full">
-                        <div className="relative w-28 h-28 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white rounded-lg flex-shrink-0 overflow-hidden flex items-center justify-center">
+                        <div className="relative w-32 h-32 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-white rounded-lg flex-shrink-0 overflow-hidden flex items-center justify-center">
                           <Image
                             src={item.image}
                             alt={item.name}
@@ -71,14 +71,14 @@ export default function CartPage() {
                               <div className="flex items-center gap-2 border border-gray-300 rounded-lg">
                                 <button 
                                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                  className="p-2 hover:bg-gray-100 transition-colors"
+                                  className="p-2 hover:bg-gray-100 transition-colors text-[#5298C1]"
                                 >
                                   <Minus className="w-4 h-4" />
                                 </button>
-                                <span className="px-4 font-sans">{item.quantity}</span>
+                                <span className="px-4 font-sans text-[#5298C1]">{item.quantity}</span>
                                 <button 
                                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                  className="p-2 hover:bg-gray-100 transition-colors"
+                                  className="p-2 hover:bg-gray-100 transition-colors text-[#5298C1]"
                                 >
                                   <Plus className="w-4 h-4" />
                                 </button>
