@@ -40,6 +40,8 @@ body {
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* GPU acceleration for transforms */
@@ -59,6 +61,12 @@ html {
 img, video {
   max-width: 100%;
   height: auto;
+}
+
+/* Prevent horizontal scroll on mobile */
+body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Animations */

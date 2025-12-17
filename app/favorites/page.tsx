@@ -32,7 +32,7 @@ export default function FavoritesPage() {
       />
 
       <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 lg:px-10 xl:px-12">
           {favoriteProducts.length === 0 ? (
             <AnimatedSection delay={100}>
               <div className="text-center py-12 sm:py-16 md:py-20">
@@ -53,18 +53,18 @@ export default function FavoritesPage() {
               </div>
             </AnimatedSection>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
               {favoriteProducts.map((product, index) => (
                 <AnimatedSection key={product.id} delay={index * 100}>
                   <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
-                    <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 bg-gray-200">
+                    <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 bg-white flex items-center justify-center">
                       <Link href={`/pillow/${product.id}`}>
                         <Image
                           src={product.image}
                           alt={product.name}
                           fill
                           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="object-contain scale-110 transition-transform duration-300 group-hover:scale-125"
                           quality={90}
                         />
                       </Link>

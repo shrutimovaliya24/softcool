@@ -56,11 +56,11 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
   }, [showUserMenu]);
 
   return (
-    <header className="sticky top-0 z-30 w-full bg-white shadow-sm border-b border-gray-200">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
-        <div className="flex flex-row items-center h-14 sm:h-16 md:h-20">
+    <header className="sticky top-0 z-40 w-full bg-white shadow-sm border-b border-gray-200">
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <div className="flex flex-row items-center h-14 sm:h-16 md:h-20 w-full">
           {/* Mobile Menu Button */}
-          <div className="lg:hidden basis-16 sm:basis-20 flex items-center shrink-0">
+          <div className="lg:hidden flex items-center justify-start basis-[20%] lg:basis-auto shrink-0">
             <button
               onClick={onMenuClick}
               className="p-2 rounded-md hover:bg-gray-100 transition"
@@ -70,8 +70,8 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
             </button>
           </div>
 
-          {/* Logo Section - Left */}
-          <div className="flex items-center shrink-0">
+          {/* Logo Section - Center on mobile / tablet */}
+          <div className="flex items-center justify-center basis-[40%] lg:basis-auto shrink-0">
             <Link href="/" className="flex items-center">
               <Image
                 src="/logo/main_logo.png"
@@ -108,8 +108,8 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
             })}
           </nav>
 
-          {/* Login & Cart Section - Right */}
-          <div className="flex items-center justify-end gap-2 sm:gap-4 md:gap-5 ml-auto shrink-0">
+          {/* Login/Profile & Cart Section - Right */}
+          <div className="flex items-center justify-end gap-2 sm:gap-4 md:gap-5 basis-[40%] lg:basis-auto lg:ml-auto shrink-0">
             {isAuthenticated ? (
               <div className="relative" ref={userMenuRef}>
                 {/* Desktop User Button */}
@@ -127,24 +127,27 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
                   <ChevronDown className="w-4 h-4 text-[#5298C1]" />
                 </button>
 
-                {/* Mobile avatar */}
+                {/* Mobile avatar (smaller icon size on mobile) */}
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="sm:hidden p-2 rounded-md hover:bg-gray-100"
+                  className="sm:hidden p-1.5 rounded-md hover:bg-gray-100"
                 >
-                  <div className="w-8 h-8 bg-[#5298C1] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                  <div className="w-7 h-7 bg-[#5298C1] rounded-full flex items-center justify-center text-white text-xs font-bold">
                     {user?.name?.charAt(0).toUpperCase() || "U"}
                   </div>
                 </button>
 
-                {/* Dropdown */}
+                {/* Dropdown - compact card, centered below header (old style) */}
                 {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white/95 rounded-xl shadow-xl border border-[#5298C1]/20 py-2 animate-fade-in z-50 backdrop-blur-sm">
-                    <div className="px-4 py-3 border-b border-[#5298C1]/15 bg-[#5298C1]/5">
-                      <p className="text-sm font-semibold text-[#0D031A] font-sans">
+                  <div
+                    ref={userMenuRef}
+                    className="fixed top-16 sm:top-20 md:top-24 left-1/2 -translate-x-1/2 w-56 sm:w-64 md:w-72 max-w-xs bg-white rounded-xl shadow-xl border border-[#5298C1]/20 py-1.5 sm:py-2 animate-fade-in z-50"
+                  >
+                    <div className="px-3 sm:px-4 py-2 sm:py-3 border-b border-[#5298C1]/15 bg-[#5298C1]/5 rounded-t-xl">
+                      <p className="text-xs sm:text-sm font-semibold text-[#0D031A] font-sans">
                         {user?.name}
                       </p>
-                      <p className="text-xs text-[#5A646E] truncate font-sans">
+                      <p className="text-[11px] sm:text-xs text-[#5A646E] truncate font-sans">
                         {user?.email}
                       </p>
                     </div>
@@ -152,7 +155,7 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
                     <Link
                       href="/orders"
                       onClick={() => setShowUserMenu(false)}
-                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors font-sans"
+                      className="flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors font-sans"
                     >
                       <Package className="w-4 h-4 text-[#5298C1]" /> My Orders
                     </Link>
@@ -160,11 +163,13 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
                     <Link
                       href="/favorites"
                       onClick={() => setShowUserMenu(false)}
-                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors relative font-sans"
+                      className="flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors relative font-sans"
                     >
-                      <Heart className={`w-4 h-4 ${
-                        favorites.length > 0 ? "fill-red-500 text-red-500" : "text-[#5298C1]"
-                      }`} /> 
+                      <Heart
+                        className={`w-4 h-4 ${
+                          favorites.length > 0 ? "fill-red-500 text-red-500" : "text-[#5298C1]"
+                        }`}
+                      />
                       <span>My Favorites</span>
                       {favorites.length > 0 && (
                         <span className="ml-auto bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex justify-center items-center">
@@ -175,7 +180,7 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
 
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors font-sans"
+                      className="w-full flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm text-[#0D031A] hover:bg-[#FDF55A]/40 transition-colors font-sans"
                     >
                       <LogOut className="w-4 h-4 text-[#5298C1]" /> Logout
                     </button>
@@ -201,10 +206,10 @@ const Header = memo(function Header({ onMenuClick }: HeaderProps) {
             )}
 
             {/* Cart */}
-            <Link href="/cart" className="relative p-2 hover:bg-gray-100 rounded-md">
+            <Link href="/cart" className="relative p-1.5 sm:p-2 hover:bg-gray-100 rounded-md">
               <ShoppingCart className="w-6 h-6 sm:w-7 sm:h-7 text-[#5298C1]" />
               {getTotalItems() > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#5298C1] text-white text-xs font-bold rounded-full w-5 h-5 flex justify-center items-center">
+                <span className="absolute -top-1 right-0 bg-[#5298C1] text-white text-xs font-bold rounded-full w-5 h-5 flex justify-center items-center">
                   {getTotalItems() > 9 ? "9+" : getTotalItems()}
                 </span>
               )}

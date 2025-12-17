@@ -23,7 +23,7 @@ export default function CartPage() {
       />
 
       <section className="py-8 sm:py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 lg:px-10 xl:px-12">
           {cartItems.length === 0 ? (
             <AnimatedSection delay={100}>
               <div className="text-center py-16">
@@ -47,49 +47,51 @@ export default function CartPage() {
               <div className="lg:col-span-2 space-y-4">
                 {cartItems.map((item, index) => (
                   <AnimatedSection key={`${item.id}-${index}`} delay={index * 100}>
-                    <div className="bg-white p-6 rounded-xl shadow-lg hover-lift border border-[#5298C1]/20">
-                      <div className="flex gap-6">
-                        <div className="relative w-24 h-24 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
+                    <div className="bg-white p-5 sm:p-6 rounded-xl shadow-lg hover-lift border border-[#5298C1]/20">
+                      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start w-full">
+                        <div className="relative w-28 h-28 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white rounded-lg flex-shrink-0 overflow-hidden flex items-center justify-center">
                           <Image
                             src={item.image}
                             alt={item.name}
                             fill
-                            className="object-cover"
+                            className="object-contain scale-110 transition-transform duration-300"
                           />
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1 w-full">
                           <Link href={`/pillow/${item.id}`}>
-                            <h3 className="text-lg font-semibold text-[#0D031A] mb-2 font-sans hover:text-[#5298C1] transition-colors">
+                            <h3 className="text-base sm:text-lg font-semibold text-[#0D031A] mb-1.5 sm:mb-2 font-sans hover:text-[#5298C1] transition-colors">
                               {item.name}
                             </h3>
                           </Link>
-                          <p className="text-[#0D031A] mb-4 font-sans">
+                          <p className="text-sm sm:text-base text-[#0D031A] mb-3 sm:mb-4 font-sans">
                             ₹{item.price.toLocaleString()} each
                           </p>
-                          <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2 border border-gray-300 rounded-lg">
+                          <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 w-full">
+                            <div className="flex items-center gap-3">
+                              <div className="flex items-center gap-2 border border-gray-300 rounded-lg">
+                                <button 
+                                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                  className="p-2 hover:bg-gray-100 transition-colors"
+                                >
+                                  <Minus className="w-4 h-4" />
+                                </button>
+                                <span className="px-4 font-sans">{item.quantity}</span>
+                                <button 
+                                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                  className="p-2 hover:bg-gray-100 transition-colors"
+                                >
+                                  <Plus className="w-4 h-4" />
+                                </button>
+                              </div>
                               <button 
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                className="p-2 hover:bg-gray-100 transition-colors"
+                                onClick={() => removeFromCart(item.id)}
+                                className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                               >
-                                <Minus className="w-4 h-4" />
-                              </button>
-                              <span className="px-4 font-sans">{item.quantity}</span>
-                              <button 
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                className="p-2 hover:bg-gray-100 transition-colors"
-                              >
-                                <Plus className="w-4 h-4" />
+                                <Trash2 className="w-5 h-5" />
                               </button>
                             </div>
-                            <button 
-                              onClick={() => removeFromCart(item.id)}
-                              className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                            >
-                              <Trash2 className="w-5 h-5" />
-                            </button>
-                            <div className="ml-auto">
-                              <p className="text-lg font-semibold text-[#0D031A] font-sans">
+                            <div className="w-full sm:w-auto text-right sm:text-left">
+                              <p className="text-base sm:text-lg font-semibold text-[#0D031A] font-sans">
                                 ₹{(item.price * item.quantity).toLocaleString()}
                               </p>
                             </div>
